@@ -67,25 +67,25 @@ export function journeyReport(s){
   summons:sum(records,r=>r.record.summons),facilities:sum(records,r=>r.record.facilities),shots:sum(records,r=>r.record.shots),checks:sum(records,r=>r.record.checks),
   companions:uniqueBy(records.flatMap(r=>r.record.allies||[]),r=>r.id),
   partial:records.length<history.length||telemetry.length<records.length||telemetry.some(t=>t.partial),
-  fatal:['阵亡','全队覆灭'].includes(s.ending),art:BY_ID[s.art]};
+  fatal:['阵亡','全队覆灭'].includes(s.ending),failed:s.ending==='任务失败',art:BY_ID[s.art]};
  report.story=endingStory(s,report);report.imprints=imprints(s,report);return report;
 }
 export function endingStory(s,r){
  const [chapterTitle,closure]=CHAPTER_ENDINGS[DATA.campaign.nodes.indexOf(r.current)]||CHAPTER_ENDINGS[0];
- const success=r.completed.some(n=>n.id===r.current.id)&&!r.fatal;
- const title=r.fatal?'此处仍有你的足迹':success?chapterTitle:r.evacuations?'未闭合的航线':'一页未尽的记录';
+ const success=r.completed.some(n=>n.id===r.current.id)&&!r.fatal&&!r.failed;
+ const title=r.fatal?'此处仍有你的足迹':r.failed?'未能完成的任务':success?chapterTitle:r.evacuations?'未闭合的航线':'一页未尽的记录';
  const origin=s.rolls?.[0]?.name||'尚未记录的故乡',race=s.rolls?.[1]?.name||'旅人',art=r.art;
  const opening=`来自${origin}的${race}，以“${s.name}”之名在${r.start.name}醒来。${s.identity==='I01'?'感染并未替你决定将走向哪里，源石的回应随每一次选择而改变。':'你把尚可承受的体力留给了行路、坚守与下一次决策。'}${art?'最初与你相遇的是'+art.name+'，其原型来自'+art.source+'。':''}`;
  const road=r.visited.length>1?`从${r.start.name}到${r.current.name}，档案记录了${r.visited.length}处抵达的节点、${r.wins.length}场完成的任务。`:`在${r.current.name}，你完成了${r.wins.length}场任务。`;
  const growth=r.initial?`你的综合战力从${tierLabel(numericRating(r.initial).score)}成长为${tierLabel(numericRating(r.final).score)}。${r.days?String(r.days)+'个准备日，把转盘的偶然磨成了可以使用的能力。':'没有被使用的准备日留在了身后，实战成为这段记录的主要来源。'}`:'最终能力与成长留在了档案中；这份旧记录未保存完整的起点。';
  const combat=r.hardest?`最强的一份击败记录属于${r.hardest.name}（${r.hardest.grade}），发生在“${r.hardest.battle}”。${r.hardest.scope==='心象交锋'?'这是一场心象交锋的战果，不代表对其命运的改写。':r.hardest.scope==='局部分体'?'击倒的是局部分体，集群的存在并未因此终结。':'终端保存的是这次战场交锋的结果。'}`:r.bosses.some(b=>b.outcome==='repelled')?'有些强敌仍留在战场。你完成了目标，拿到了继续前行的窗口；这些遭遇按任务记录封存。':'这一页尚没有经核实的Boss击败记录，已经完成的行动仍有它们的分量。';
- const conclusion=r.fatal?`最后的信号停在“${s.history?.at(-1)?.title||r.current.name}”。全队战斗单位退出后，PRTS封存了这段旅程；此前打开的通道和已经完成的救援，仍留在记录里。`:success?closure:`行动离开了${r.current.name}，${r.evacuations?'未完成的任务以撤离记录保留，':'尚未抵达的终点留给下一次出发，'}${r.wins.length?'已经完成的'+r.wins.length+'场行动没有被这一页的结束抹去。':'这份档案记住了一个来到战场、作出选择的人。'}`;
+ const conclusion=r.fatal?`最后的信号停在“${s.lastResult?.title||s.history?.at(-1)?.title||r.current.name}”。${s.ending==='阵亡'?'铁人模式下自身阵亡，':'全队战斗单位退出后，'}PRTS封存了这段旅程；此前打开的通道和已经完成的救援，仍留在记录里。`:r.failed?`旅程停在“${s.lastResult?.title||r.current.name}”。${s.endingReason||s.lastResult?.reason||'本场作战目标未达成'}。本局就此结束；已经完成的行动和成长仍保存在档案中。`:success?closure:`行动离开了${r.current.name}，${r.evacuations?'未完成的任务以撤离记录保留，':'尚未抵达的终点留给下一次出发，'}${r.wins.length?'已经完成的'+r.wins.length+'场行动没有被这一页的结束抹去。':'这份档案记住了一个来到战场、作出选择的人。'}`;
  const modes=[];
- if(s.iron)modes.push({name:'铁人模式',text:r.fatal?'终端不再为这段旅程重开作战，所有选择在最后的信号中定格。':'你选择了全队覆灭即封存的行路规则。'+(r.rescues?'博士曾退场'+r.rescues+'次，存活的队伍仍完成了目标，把你接回下一场行动。':'每一次完成的任务都承接着上一场留下的状态。')});
- else modes.push({name:'常规模式',text:r.retries?'应急额度让你重新走进了'+r.retries+'场遭遇，终端同时保留了失败与后来作出的选择。':'你保留了应急重整的可能，这段行路尚未用到再次出发的额度。'});
+ if(s.iron)modes.push({name:'铁人模式',text:r.fatal?'终端不再为这段旅程重开作战，所有选择在最后的信号中定格。':'你选择了自身阵亡即结束本局的行路规则。'+(r.rescues?'博士曾退场'+r.rescues+'次，存活的队伍仍完成了目标，把你接回下一场行动。':'每一次完成的任务都承接着上一场留下的状态。')});
+ else modes.push({name:'常规模式',text:r.retries?'应急额度让你重新走进了'+r.retries+'场遭遇，终端同时保留了失败与后来作出的选择。':'剧情任务失败即结束本局；矢量突破未通过可继续准备，模拟作战不影响旅程。'});
  if(s.legend)modes.push({name:'传奇之路',text:art?.pool==='hidden'?`隐藏池的回声落在${art.name}上。${s.mastery>=200?'升变已在这段旅程中展开，传说终于成为已解锁的招式。':'这份传说仍等待更多熟练度，潜力与已经做到的事分别写入档案。'}`:`未知的源石技艺曾有更大的机会与你相遇；这次陪你走过战场的，是${art?.name||'已记录的能力'}。`});
  if(s.solo)modes.push({name:'一人成军',text:`后续作战没有编入剧情队友。${r.summons?'你让源石技艺展开了'+r.summons+'次召唤部署，独自的阵列也有自己的回应。':'指令只在你自己的行动序列中落下。'}提高后的初始战力权重给了你起点，完成目标仍依靠逐次决策。`});
- return {title,subtitle:r.fatal?'行动终止 · 档案封存':success?'节点完成 · 终章记述':'撤离记录 · 仍有余响',paragraphs:[opening,road+growth,combat,conclusion],modes};
+ return {title,subtitle:r.fatal?'行动终止 · 档案封存':r.failed?'任务失败 · 旅程结束':success?'节点完成 · 终章记述':'撤离记录 · 仍有余响',paragraphs:[opening,road+growth,combat,conclusion],modes};
 }
 function imprints(s,r){const marks=[];
  if(r.completed.length)marks.push({name:'完整的一章',detail:'完整完成'+r.completed.length+'个节点的四场任务'});

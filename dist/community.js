@@ -1,7 +1,7 @@
 export const REPOSITORY_URL='https://github.com/stellarator-0647/terra-fate-wheel';
 export const INSPIRATION_URL='https://jsdh.de5.net/games/jujutsu-wheel-normal-v1';
 export const ISSUES_URL=REPOSITORY_URL+'/issues';
-export const COMMUNITY_VERSION='1.30.0';
+export const COMMUNITY_VERSION='1.30.1';
 const esc=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 export const FEEDBACK_CATEGORIES=['玩法与平衡','界面与手机适配','问题反馈','其他建议'];
 

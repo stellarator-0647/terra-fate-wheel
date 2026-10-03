@@ -1,0 +1,43 @@
+# Place this server block inside nginx's http configuration.
+# Replace the domain, and point current to the uploaded www directory.
+server {
+    listen 80;
+    server_name terra.example.com;
+    root /srv/terra-fate-wheel/current;
+    index index.html;
+
+    include /etc/nginx/mime.types;
+    default_type application/octet-stream;
+    charset utf-8;
+    gzip on;
+    gzip_types text/css application/javascript text/javascript application/json image/svg+xml;
+    gzip_min_length 1024;
+
+    add_header X-Content-Type-Options nosniff always;
+    add_header Referrer-Policy strict-origin-when-cross-origin always;
+
+    location = /healthz {
+        default_type text/plain;
+        return 200 "terra-fate-wheel:ok\n";
+    }
+
+    # Unhashed application files must refresh after a deployment.
+    location / {
+        try_files $uri $uri/ =404;
+        add_header Cache-Control "no-cache" always;
+        add_header X-Content-Type-Options nosniff always;
+        add_header Referrer-Policy strict-origin-when-cross-origin always;
+    }
+
+    # Static artwork/music; nginx also supports audio byte-range requests.
+    location /assets/ {
+        try_files $uri =404;
+        add_header Cache-Control "public, max-age=3600";
+        add_header X-Content-Type-Options nosniff always;
+        add_header Referrer-Policy strict-origin-when-cross-origin always;
+    }
+
+    location ~ /\. {
+        deny all;
+    }
+}

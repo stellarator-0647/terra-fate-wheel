@@ -1,0 +1,13 @@
+node_modules/
+.wrangler/
+.sites-runtime/
+artifacts/
+tools/*.py
+tools/trace-career.mjs
+
+.openai/
+.env
+.env.*
+!.env.example
+*.pem
+*.key

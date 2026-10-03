@@ -1,0 +1,15 @@
+{
+  "name": "terra-fate-wheel",
+  "version": "1.30.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test tests/*.test.mjs",
+    "serve": "node tools/server.mjs",
+    "audit": "node tools/v21-report.mjs",
+    "balance": "node tools/balance.mjs",
+    "simulate": "node tools/v22-simulation.mjs",
+    "deliver": "node tools/v21-report.mjs"
+  },
+  "devDependencies": {}
+}

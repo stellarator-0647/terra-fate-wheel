@@ -1,0 +1,26 @@
+.community-actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:22px}
+.community-link{display:inline-flex;align-items:center;justify-content:center;min-height:42px;padding:9px 16px;border:1px solid #708d99;color:#bde5ec;text-decoration:none;font-weight:600}
+.community-link.primary{background:#9bd4de;color:#143b49;border-color:#9bd4de}
+.community-link:hover{background:#cfe7ec;color:#173d4d}
+.community-link:focus-visible{outline:3px solid #edc879;outline-offset:3px}
+.thanks-note p{font-size:16px;line-height:1.85;color:#c9dce3;margin:16px 0}
+.thanks-note .thanks-lead{font-size:21px;font-weight:700;color:#ecf7f8;margin-top:8px}
+.thanks-note a:not(.community-link){color:#95d2dd;text-decoration:underline;text-underline-offset:4px}
+.thanks-note strong{color:#efd295}
+.feedback-screen{max-width:1060px;margin:auto}
+.feedback-layout{display:grid;grid-template-columns:minmax(0,1.65fr) minmax(230px,1fr);gap:20px}
+.feedback-paper{border-top:3px solid #a0d5df}
+.feedback-paper>p,.feedback-guide>p{font-size:14px;line-height:1.8;color:#b7d0d8;margin:15px 0 20px}
+#feedback-form{display:grid;gap:17px}
+#feedback-form label{display:grid;gap:7px;color:#cce3e9;font-size:14px;min-width:0}
+#feedback-form input,#feedback-form textarea,#feedback-form select{width:100%;max-width:none;min-width:0;font:inherit;color:#163b49;background:#e3eef1;border:1px solid #7495a2;border-radius:0;padding:10px 12px}
+#feedback-form textarea{resize:vertical;line-height:1.75;min-height:150px}
+#feedback-form input::placeholder,#feedback-form textarea::placeholder{color:#5b7580;opacity:1}
+#feedback-form .community-actions{margin:3px 0 0}
+.feedback-draft-note{font-size:12px;line-height:1.7;color:#a4bfc9;margin:0}
+.feedback-guide .community-link{display:flex;justify-content:flex-start;margin:12px 0}
+.feedback-guide h3{margin:20px 0 12px}
+.feedback-ready{margin-top:22px;padding:17px;border-left:3px solid #85cad7;background:#274553;color:#def2f6}
+.feedback-ready[hidden]{display:none}
+.feedback-ready p{font-size:14px;line-height:1.7;margin:12px 0 16px}
+@media(max-width:760px){.feedback-layout{grid-template-columns:minmax(0,1fr)}.feedback-paper,.feedback-guide{padding:18px}.community-actions>*{min-height:44px}.thanks-note p{font-size:15px}.thanks-note .community-actions>*{flex:1 1 100%}.feedback-screen .pagehead{align-items:flex-start;gap:14px}.feedback-screen h1{font-size:26px}.feedback-paper h2,.feedback-guide h2{font-size:20px}}

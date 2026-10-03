@@ -1,0 +1,87 @@
+{
+  "directory": "https://prts.wiki/w/PRTS:文件一览#团队LOGO",
+  "rights": "明日方舟游戏素材版权属于上海鹰角网络科技有限公司及其关联公司；本游戏为同人作品。",
+  "assets": [
+    {
+      "id": "penguin",
+      "name": "团队logo_企鹅物流.png",
+      "page": "https://prts.wiki/w/%E6%96%87%E4%BB%B6:%E5%9B%A2%E9%98%9Flogo_%E4%BC%81%E9%B9%85%E7%89%A9%E6%B5%81.png",
+      "src": "https://media.prts.wiki/thumb/b/b1/%E5%9B%A2%E9%98%9Flogo_%E4%BC%81%E9%B9%85%E7%89%A9%E6%B5%81.png/100px-%E5%9B%A2%E9%98%9Flogo_%E4%BC%81%E9%B9%85%E7%89%A9%E6%B5%81.png?v=kqz8hgepdatd0w5oxnb4n8jq9pxsb3f",
+      "file": "penguin.png",
+      "bytes": 8411,
+      "sha256": "d08ff11c395d6b9a0d34f37d8558a06dac8aabb887615162632a1c24bc23e458"
+    },
+    {
+      "id": "glasgow",
+      "name": "团队logo_格拉斯哥帮.png",
+      "page": "https://prts.wiki/w/%E6%96%87%E4%BB%B6:%E5%9B%A2%E9%98%9Flogo_%E6%A0%BC%E6%8B%89%E6%96%AF%E5%93%A5%E5%B8%AE.png",
+      "src": "https://media.prts.wiki/thumb/e/ec/%E5%9B%A2%E9%98%9Flogo_%E6%A0%BC%E6%8B%89%E6%96%AF%E5%93%A5%E5%B8%AE.png/100px-%E5%9B%A2%E9%98%9Flogo_%E6%A0%BC%E6%8B%89%E6%96%AF%E5%93%A5%E5%B8%AE.png?v=8jbq7alko9etqbeg5fom3qn2nkbzv5g",
+      "file": "glasgow.png",
+      "bytes": 6808,
+      "sha256": "97d966005753b9b6b1e3bff11333df5bb9edf82b0f2d9ca574b40a726130d22c"
+    },
+    {
+      "id": "rhine",
+      "name": "团队logo_莱茵生命.png",
+      "page": "https://prts.wiki/w/%E6%96%87%E4%BB%B6:%E5%9B%A2%E9%98%9Flogo_%E8%8E%B1%E8%8C%B5%E7%94%9F%E5%91%BD.png",
+      "src": "https://media.prts.wiki/thumb/d/d0/%E5%9B%A2%E9%98%9Flogo_%E8%8E%B1%E8%8C%B5%E7%94%9F%E5%91%BD.png/100px-%E5%9B%A2%E9%98%9Flogo_%E8%8E%B1%E8%8C%B5%E7%94%9F%E5%91%BD.png?v=bwaz4arhzxv8j63b9z9362sc6sjx1ca",
+      "file": "rhine.png",
+      "bytes": 3988,
+      "sha256": "98359b8b8a6d12255f258d06a1a46f8e53cddb1249bdc052f5ae7731b0b29461"
+    },
+    {
+      "id": "lgd",
+      "name": "团队logo_龙门近卫局.png",
+      "page": "https://prts.wiki/w/%E6%96%87%E4%BB%B6:%E5%9B%A2%E9%98%9Flogo_%E9%BE%99%E9%97%A8%E8%BF%91%E5%8D%AB%E5%B1%80.png",
+      "src": "https://media.prts.wiki/thumb/4/4e/%E5%9B%A2%E9%98%9Flogo_%E9%BE%99%E9%97%A8%E8%BF%91%E5%8D%AB%E5%B1%80.png/100px-%E5%9B%A2%E9%98%9Flogo_%E9%BE%99%E9%97%A8%E8%BF%91%E5%8D%AB%E5%B1%80.png?v=4xa2b6pbxks24c69yuikg2oz9crbdpj",
+      "file": "lgd.png",
+      "bytes": 8414,
+      "sha256": "5cc8cfdb44ab143e47504dea19a0bfafbb285060a6a5aad166aef211b4484f32"
+    },
+    {
+      "id": "rhodes",
+      "name": "Logo_罗德岛.png",
+      "page": "https://prts.wiki/w/%E6%96%87%E4%BB%B6:Logo_%E7%BD%97%E5%BE%B7%E5%B2%9B.png",
+      "src": "https://media.prts.wiki/thumb/4/41/Logo_%E7%BD%97%E5%BE%B7%E5%B2%9B.png/50px-Logo_%E7%BD%97%E5%BE%B7%E5%B2%9B.png?v=20nz08hico77xghjctflzrssax8bq18",
+      "file": "rhodes.png",
+      "bytes": 2807,
+      "sha256": "36cb211a30acc1f63d993c56e9b216c3bba772738fb8df9413b40d9e8fd6339d"
+    },
+    {
+      "id": "babel",
+      "name": "Logo_巴别塔.png",
+      "page": "https://prts.wiki/w/%E6%96%87%E4%BB%B6:Logo_%E5%B7%B4%E5%88%AB%E5%A1%94.png",
+      "src": "https://media.prts.wiki/thumb/b/b9/Logo_%E5%B7%B4%E5%88%AB%E5%A1%94.png/100px-Logo_%E5%B7%B4%E5%88%AB%E5%A1%94.png?v=jr4jec9se7nk4hx0cct1lefv2wbzlyx",
+      "file": "babel.png",
+      "bytes": 7672,
+      "sha256": "3fc9db8efbfbd11661dedbe1ac87ae7de2cd14193876b283a33ce5714e5bcb6f"
+    },
+    {
+      "id": "dublin",
+      "name": "Logo_深池.png",
+      "page": "https://prts.wiki/w/%E6%96%87%E4%BB%B6:Logo_%E6%B7%B1%E6%B1%A0.png",
+      "src": "https://media.prts.wiki/thumb/6/62/Logo_%E6%B7%B1%E6%B1%A0.png/100px-Logo_%E6%B7%B1%E6%B1%A0.png?v=03pvmd003vswi3fqxydvruu8kof8vl0",
+      "file": "dublin.png",
+      "bytes": 5562,
+      "sha256": "45dc2109d8da0a2822437f9709dfeb16a3f62882ea35459e2cec857059518d02"
+    },
+    {
+      "id": "sui",
+      "name": "Logo_炎-岁.png",
+      "page": "https://prts.wiki/w/%E6%96%87%E4%BB%B6:Logo_%E7%82%8E-%E5%B2%81.png",
+      "src": "https://media.prts.wiki/thumb/a/af/Logo_%E7%82%8E-%E5%B2%81.png/100px-Logo_%E7%82%8E-%E5%B2%81.png?v=6y8321ej253ex1u2jw8cknsv7yxmnof",
+      "file": "sui.png",
+      "bytes": 11591,
+      "sha256": "20833471a1bea18a8b6c10f69bfd5bb4343c901c858cbceaa9fdfcc982214db8"
+    },
+    {
+      "id": "elite",
+      "name": "Logo_罗德岛-精英干员.png",
+      "page": "https://prts.wiki/w/%E6%96%87%E4%BB%B6:Logo_%E7%BD%97%E5%BE%B7%E5%B2%9B-%E7%B2%BE%E8%8B%B1%E5%B9%B2%E5%91%98.png",
+      "src": "https://media.prts.wiki/thumb/0/0f/Logo_%E7%BD%97%E5%BE%B7%E5%B2%9B-%E7%B2%BE%E8%8B%B1%E5%B9%B2%E5%91%98.png/100px-Logo_%E7%BD%97%E5%BE%B7%E5%B2%9B-%E7%B2%BE%E8%8B%B1%E5%B9%B2%E5%91%98.png?v=a9nmmslbtl8cf6nibk568naf5o6gurm",
+      "file": "elite.png",
+      "bytes": 10054,
+      "sha256": "9b76ac4b208eb03f36f7f9d81a854be3b0a5f0f8a860a1820dff777ec553c642"
+    }
+  ]
+}

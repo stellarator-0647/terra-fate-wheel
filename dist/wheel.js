@@ -16,7 +16,7 @@ export function creationOptions(step,state){
  if(step===3){const rows=normalized(DATA.campaign.nodes,'entry_weight');return state.selectedNode==='random'?rows:rows.map(r=>({...r,probability:r.id===state.selectedNode?1:0}));}
  if(step===4)return artsOptions(state.legend);
  if(step===10)return normalized(DATA.talents.grades.map(g=>({...g,label:g.grade+' · '+g.name+' ×'+g.training_multiplier})));
- return normalized(TIERS.map((_,i)=>({id:String(i),label:tierLabel(i),weight:initialWeights(state.solo)[i]})));
+ return normalized(TIERS.map((_,i)=>({id:String(i),label:tierLabel(i),weight:initialWeights(state.solo,state.hazard)[i]})));
 }
 export const dailyOptions=()=>normalized(DAILY_PROJECTS.map(p=>({...p,id:p.name})));
 export function vectorTierOptions(tier){

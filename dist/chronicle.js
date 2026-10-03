@@ -84,12 +84,14 @@ export function endingStory(s,r){
  if(s.iron)modes.push({name:'铁人模式',text:r.fatal?'终端不再为这段旅程重开作战，所有选择在最后的信号中定格。':'你选择了自身阵亡即结束本局的行路规则。'+(r.rescues?'博士曾退场'+r.rescues+'次，存活的队伍仍完成了目标，把你接回下一场行动。':'每一次完成的任务都承接着上一场留下的状态。')});
  else modes.push({name:'常规模式',text:r.retries?'应急额度让你重新走进了'+r.retries+'场遭遇，终端同时保留了失败与后来作出的选择。':'剧情任务失败即结束本局；矢量突破未通过可继续准备，模拟作战不影响旅程。'});
  if(s.legend)modes.push({name:'传奇之路',text:art?.pool==='hidden'?`隐藏池的回声落在${art.name}上。${s.mastery>=200?'升变已在这段旅程中展开，传说终于成为已解锁的招式。':'这份传说仍等待更多熟练度，潜力与已经做到的事分别写入档案。'}`:`未知的源石技艺曾有更大的机会与你相遇；这次陪你走过战场的，是${art?.name||'已记录的能力'}。`});
+ if(s.hazard)modes.push({name:'险路恶敌',text:'这条航线上，敌人的生命、攻击与防护都更强。更高的初始战力权重和额外50%的属性成长，让每个准备日都有了更大的分量；任务期限和失败规则仍由战场决定。'});
  if(s.solo)modes.push({name:'一人成军',text:`后续作战没有编入剧情队友。${r.summons?'你让源石技艺展开了'+r.summons+'次召唤部署，独自的阵列也有自己的回应。':'指令只在你自己的行动序列中落下。'}提高后的初始战力权重给了你起点，完成目标仍依靠逐次决策。`});
  return {title,subtitle:r.fatal?'行动终止 · 档案封存':r.failed?'任务失败 · 旅程结束':success?'节点完成 · 终章记述':'撤离记录 · 仍有余响',paragraphs:[opening,road+growth,combat,conclusion],modes};
 }
 function imprints(s,r){const marks=[];
  if(r.completed.length)marks.push({name:'完整的一章',detail:'完整完成'+r.completed.length+'个节点的四场任务'});
  if(s.iron&&r.wins.length>=4&&!r.fatal)marks.push({name:'不可重来的路',detail:'铁人规则下完成至少四场行动'});
+ if(s.hazard&&r.wins.length>=4)marks.push({name:'险路行者',detail:'在险路恶敌规则下完成至少四场剧情作战'});
  if(s.solo&&r.wins.length>=4)marks.push({name:'一人成军',detail:'独立阵列完成至少四场行动'});
  if(r.defeated.length)marks.push({name:'强敌的回声',detail:'留下'+r.defeated.length+'份Boss击败记录'});
  if(s.mastery>=100)marks.push({name:s.mastery>=200?'升变':'专精',detail:'源石技艺熟练度达到'+(s.mastery>=200?'200':'100')});

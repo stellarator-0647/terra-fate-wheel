@@ -1,3 +1,4 @@
+import {enemyStats} from './modes.js';
 import {newTelemetry,recordAction,recordDamage,recordHeal} from './combat-record.js';
 import {HOSTS,tuneSummon} from './summons.js';
 import {tacticalSearch} from './tactics.js';
@@ -26,11 +27,11 @@ export const cardOf=u=>u.cardData||BY_ID[u.card];
 export function newBattle(player,spec,{rng=1,config={}}={}){
  let b={version:1,rng:rng||1,units:[],time:0,round:0,nextRound:100,actor:null,log:[],logSeq:0,serial:0,over:null,spec:copy(spec),scene:{},scheduled:[],actionId:0,config,seenDeaths:[],usage:{},defends:0,restCount:0,telemetry:newTelemetry()};
  let pc=evolvedCard(BY_ID[player.art],player.mastery||0);const p=makeUnit('player',player.name||'博士的同行者','ally',player.stats,pc,{hp:player.hp??player.stats.H,mastery:player.mastery||0,specialization:player.specialization||'',extreme:!!player.extreme,mode:player.mode||0,isPlayer:true});b.units.push(p);
- for(const [side,ids]of [['ally',spec.allies||[]],['enemy',spec.enemies||[]]])for(const [i,id]of ids.entries()){let raw=DATA.campaign.units.find(x=>x.id===id);if(!raw)throw Error('Missing NPC '+id);let card=npcCard(raw);b.units.push(makeUnit(side+'-'+id+'-'+i,raw.name,side,{...raw.stats,Emax:Math.max(raw.stats.Emax,energyCapacity(raw.stats.R)),rating:raw.rating},card,{npcId:id,boss:raw.rating.score>=7,mastery:200,aiSource:raw.AI,rawPassive:raw.passive}));}
- for(const raw of spec.customUnits||[]){const c=evolvedCard(BY_ID[raw.art],raw.mastery||0);b.units.push(makeUnit(raw.id||'projection',raw.name,'enemy',raw.stats,c,{mastery:raw.mastery||0}));}
+ for(const [side,ids]of [['ally',spec.allies||[]],['enemy',spec.enemies||[]]])for(const [i,id]of ids.entries()){let raw=DATA.campaign.units.find(x=>x.id===id);if(!raw)throw Error('Missing NPC '+id);let card=npcCard(raw);b.units.push(makeUnit(side+'-'+id+'-'+i,raw.name,side,enemyStats({...raw.stats,Emax:Math.max(raw.stats.Emax,energyCapacity(raw.stats.R)),rating:raw.rating},config.hazard&&side==='enemy'),card,{npcId:id,boss:raw.rating.score>=7,mastery:200,aiSource:raw.AI,rawPassive:raw.passive}));}
+ for(const raw of spec.customUnits||[]){const c=evolvedCard(BY_ID[raw.art],raw.mastery||0);b.units.push(makeUnit(raw.id||'projection',raw.name,'enemy',enemyStats(raw.stats,config.hazard),c,{mastery:raw.mastery||0}));}
  b.supply=config.supply??0;setupScene(b);
  for(let u of [...b.units])initUnit(b,u);
- refreshIntents(b);log(b,'作战开始 · '+spec.title);return b;
+ refreshIntents(b);log(b,'作战开始 · '+spec.title);if(config.hazard)log(b,'险路恶敌 · 敌方生命×1.5，攻击×1.3，双抗与技力×1.2','gold');return b;
 }
 function initUnit(b,u){const c=cardOf(u);if(!c)return;const ps=c.passive||[];
  if(ps.includes('chimera'))u.stats.P*=1.15;if(ps.includes('nilu'))status(b,u,u,'抵抗',1,99);if(ps.includes('oath'))for(let v of b.units.filter(v=>v.side===u.side&&!v.owner&&!v.facility))addShield(b,u,v,.12);if(ps.includes('forms')){u.form=u.mode;let k=['A','P','H'][u.form];u.stats[k]*=1.3;if(k==='H')u.hp=Math.floor(u.hp*1.3);}if(ps.includes('gravity'))u.statuses['不可选中']={n:1,until:999};
@@ -205,7 +206,7 @@ export function summonFremont(b,source,side='enemy'){
  {button:'A',name:'即兴施展的防身术',cost:24,cd:0,unlock:0,target:'enemy_one',ops:[{op:'consume',n:'all'},hit(1,'P','magic',{perResource:.7})]},
  {button:'B',name:'痴愚惩戒',cost:30,cd:2,unlock:0,target:'enemy_all',ops:[hit(1),st('沉默',1,1),{op:'gain',n:1}]},
  {button:'C',name:'“放逐的黑棺”',cost:40,cd:3,unlock:0,target:'enemy_one',ops:[{op:'special',name:'fremontSeal'}]}]};
- const f=makeUnit('fremont-'+(++b.serial),'愤怒的弗莱蒙特',side,stats,card,{mastery:200,lastOpportunityAt:b.time,revives:1,phase:1,eventBoss:true});b.units.push(f);log(b,'异常事件：愤怒的弗莱蒙特降临','gold');refreshIntents(b);return f;
+ const f=makeUnit('fremont-'+(++b.serial),'愤怒的弗莱蒙特',side,enemyStats(stats,b.config.hazard&&side==='enemy'&&source.side!=='enemy'),card,{mastery:200,lastOpportunityAt:b.time,revives:1,phase:1,eventBoss:true});b.units.push(f);log(b,'异常事件：愤怒的弗莱蒙特降临','gold');refreshIntents(b);return f;
 }
 
 

@@ -1,3 +1,4 @@
+import {HAZARD_TILT} from './modes.js';
 export const AXES=['endurance','strength','technique','arts','adaptability'];
 export const AXIS_NAMES=['生理耐受','物理强度','战斗技巧','源石技艺强度','源石技艺适应性'];
 export const TIERS=['战场中坚·下位','战场中坚·标准','战场中坚·上位','军事精锐·下位','军事精锐·标准','大国将军·下位','大国将军·标准','传奇英雄·下位','传奇英雄·标准','传奇英雄·上位','王庭之主·标准','王庭之主·上位','神明碎片·下位','神明碎片·标准','崛起之物·标准','崛起之物·上位','崛起之物·顶尖'];
@@ -6,7 +7,8 @@ export const tierLabel=s=>LETTERS[Math.floor(clamp(s,0,16.999))]+' · '+TIERS[Ma
 export const ANCHORS=[40,55,75,100,135,180,240,330,450,620,860,1200,1700,2400,3400,4800,6800,9600];
 export const WEIGHTS=[6,9,13,23.002,20,13,7.5,4,2.5,1.3,.45,.15,.06,.025,.009,.003,.001];
 export const SOLO_WEIGHTS=[.5,1,3,11,18,22,18,12,7,4,2,.8,.4,.2,.07,.02,.01];
-export const initialWeights=solo=>solo?SOLO_WEIGHTS:WEIGHTS;
+export const initialWeights=(solo,hazard=false)=>{const weights=solo?SOLO_WEIGHTS:WEIGHTS;return hazard?weights.map((w,i)=>w*HAZARD_TILT**Math.min(i,12)):weights;};
+export function initialHighChance(solo,hazard=false){const w=initialWeights(solo,hazard);return w.slice(5).reduce((a,b)=>a+b,0)/w.reduce((a,b)=>a+b,0);}
 export const GATES={10:8,11:12,12:18,13:24,14:32,15:42,16:56};
 export const clamp=(x,a,b)=>Math.min(b,Math.max(a,x));
 export const copy=x=>structuredClone(x);
@@ -24,7 +26,7 @@ export function grow(axis,delta,event,source='training',proof=0){if(axis.events.
  while(pending>1e-10&&axis.score<16.999){let boundary=Math.floor(axis.score)+1;if(boundary>=17){axis.score=Math.min(16.999,axis.score+pending);break;}let distance=boundary-axis.score;if(pending<distance-1e-10){axis.score+=pending;break;}if(boundary>=10&&!axis.unlocked.includes(boundary)&&axis.proof<GATES[boundary]){let allowed=Math.max(0,boundary-.001-axis.score);axis.score+=allowed;axis.reserve=Math.min(.25,pending-allowed);break;}axis.score=boundary;pending-=distance;if(boundary>=10&&!axis.unlocked.includes(boundary))axis.unlocked.push(boundary);axis.proof=0;}axis.score=+axis.score.toFixed(9);return true;}
 export function mitigate(defense,x){return clamp(defense/(defense+4*Math.max(1,x)),0,.9);}
 export function numericRating(stats){return rating([score(stats.H/12),score(stats.D),score(stats.A),score(stats.P),score(stats.R)]);}
-export function rollStat(state){let tier=weighted(state,initialWeights(state.solo).map((weight,i)=>({i,weight}))).i;return tier+Math.floor(random(state)*1000)/5000;}
+export function rollStat(state){let tier=weighted(state,initialWeights(state.solo,state.hazard).map((weight,i)=>({i,weight}))).i;return tier+Math.floor(random(state)*1000)/5000;}
 
 export const energyCapacity=r=>Math.floor(100+100*Math.sqrt(Math.max(0,r)/100));
 export const energyRegen=e=>e>0?Math.max(12,Math.floor(e*.06)):0;

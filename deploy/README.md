@@ -1,17 +1,18 @@
 # 公网部署
 
-## v29.1 当前发布
+## v30 当前发布
 
-2026-10-03 已发布 v29.1（1.29.1）。隐藏抽取结果及角色档案增加明确标记，技能分支移到行动按钮上方，并保留尚未执行的选择。124 项回归通过；手机小屏、横屏及桌面布局已验收，公开页面已验证分支保留与隐藏角色标记。本轮未重测大陆网络。
+2026-10-03 已发布 1.30.0。首页新增意见页面，结局新增灵感来源、GitHub 链接与 Star 邀请弹窗。127 项测试通过；线上验证反馈生成、复制、刷新草稿恢复，以及手机结局弹窗关闭与再次打开。
 
-正式网址：[terra-fate-wheel.pages.dev](https://terra-fate-wheel.pages.dev/)；本次部署：[708e6710.terra-fate-wheel.pages.dev](https://708e6710.terra-fate-wheel.pages.dev)，源码提交 `8d3adaa8df18a9e7da1401fe35fa25696c12896f`。发布包：`E:/Desktop/新建文件夹/泰拉命运转盘_Cloudflare_v29.1`。
+正式网址：[terra-fate-wheel.pages.dev](https://terra-fate-wheel.pages.dev/)；本次部署：[d5db1a97.terra-fate-wheel.pages.dev](https://d5db1a97.terra-fate-wheel.pages.dev)。公开游戏源码提交 `e293dd4d131dd9e060cc30cf9735dc63bad9dffe`，项目地址：[GitHub](https://github.com/stellarator-0647/terra-fate-wheel)。
 
+74 个游戏文件加一个 `_headers` 配置；本轮 5 个新增或修改文件的公开 SHA-256、MIME 与首页缓存检查全部通过。文件请求经已有代理执行，本轮未重测中国大陆网络。反馈提交须由玩家在 GitHub 登录确认；网站无需后台或数据库。
 
 当前游戏是独立静态网站，无数据库、无后端服务、无构建依赖。部署 `dist` 的全部内容即可运行；图片、字体及背景音乐随包携带。打开 HTML 需要 HTTP/HTTPS 服务，不能直接双击文件。
 
 ## 本次发布状态
 
-当前版本：v28（1.28.0），包含手机适配修复，详情见 [Cloudflare 部署说明](cloudflare/README.md)。
+当前版本：v30（1.30.0），包含结局致谢和意见反馈，详情见 [Cloudflare 部署说明](cloudflare/README.md)。
 
 此前 v27.1：2026-10-03 已部署至 [Cloudflare Pages 正式站点](https://terra-fate-wheel.pages.dev/)，71 个公开游戏文件通过完整性校验。大陆首页多节点检测中，35 个节点有 24 个返回 HTTP 200、10 个超时、1 个检测系统异常，不能保证所有大陆网络稳定访问。详细记录见 [Cloudflare 部署说明](cloudflare/README.md)。
 

@@ -10,5 +10,13 @@ test('long feedback uses a paste path without cutting the locally prepared body'
  const draft=issueDraft({category:'问题反馈',title:'长反馈',body:'中文'.repeat(900)}),url=new URL(issueLink(draft));assert.ok(!url.searchParams.has('body'));assert.ok(url.href.length<7500);assert.ok(draft.body.includes('中文'.repeat(900)));
 });
 test('feedback form escapes persisted text and ending thanks has real source links',()=>{
- const html=feedbackMarkup({title:'"><script>alert(1)</script>',body:'</textarea><img src=x onerror=alert(1)>'});assert.ok(!html.includes('<script>'));assert.ok(!html.includes('<img src=x'));assert.ok(html.includes('&lt;script&gt;'));const thanks=thanksMarkup();assert.ok(thanks.includes(INSPIRATION_URL));assert.ok(thanks.includes(REPOSITORY_URL));assert.ok(thanks.includes('免费的'));assert.ok(thanks.includes('Star'));
+ const html=feedbackMarkup({title:'"><script>alert(1)</script>',body:'</textarea><img src=x onerror=alert(1)>'});assert.ok(!html.includes('<script>'));assert.ok(!html.includes('<img src=x'));assert.ok(!html.includes('feedback-title'));assert.ok(html.includes('&lt;img'));const thanks=thanksMarkup();assert.ok(thanks.includes(INSPIRATION_URL));assert.ok(thanks.includes(REPOSITORY_URL));assert.ok(thanks.includes('免费的'));assert.ok(thanks.includes('Star'));
+});
+
+test('feedback needs no separate title and derives a bounded Unicode title from the content',()=>{
+ const draft=issueDraft({category:'界面与手机适配',body:'手机上查看召唤物不方便。希望增加折叠按钮',device:'手机'});
+ assert.equal(draft.title,'[界面与手机适配] 手机上查看召唤物不方便');
+ assert.ok(draft.body.includes('希望增加折叠按钮'));
+ const long=issueDraft({body:'😀'.repeat(90)});assert.equal(Array.from(long.title.replace('[其他建议] ','')).length,64);
+ assert.ok(!feedbackMarkup().includes('一句话概括'));
 });

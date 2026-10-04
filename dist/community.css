@@ -9,6 +9,7 @@
 .thanks-note strong{color:#efd295}
 .feedback-screen{max-width:1060px;margin:auto}
 .feedback-layout{display:grid;grid-template-columns:minmax(0,1.65fr) minmax(230px,1fr);gap:20px}
+.feedback-layout>.panel{margin:0;min-width:0;align-self:stretch}
 .feedback-paper{border-top:3px solid #a0d5df}
 .feedback-paper>p,.feedback-guide>p{font-size:14px;line-height:1.8;color:#b7d0d8;margin:15px 0 20px}
 #feedback-form{display:grid;gap:17px}
@@ -24,3 +25,10 @@
 .feedback-ready[hidden]{display:none}
 .feedback-ready p{font-size:14px;line-height:1.7;margin:12px 0 16px}
 @media(max-width:760px){.feedback-layout{grid-template-columns:minmax(0,1fr)}.feedback-paper,.feedback-guide{padding:18px}.community-actions>*{min-height:44px}.thanks-note p{font-size:15px}.thanks-note .community-actions>*{flex:1 1 100%}.feedback-screen .pagehead{align-items:flex-start;gap:14px}.feedback-screen h1{font-size:26px}.feedback-paper h2,.feedback-guide h2{font-size:20px}}
+
+/* Keep the launch panels and the three journey summaries on one outer grid. */
+.hero-start,.startfoot{width:100%;max-width:1280px;margin-inline:auto}
+.startfoot{gap:0}
+.startfoot article{min-width:0;margin:0;padding:20px 26px 16px}
+.startfoot article:last-child{border-right:0}
+@media(max-width:760px){.startfoot article{padding:18px 0;border-right:0}}
